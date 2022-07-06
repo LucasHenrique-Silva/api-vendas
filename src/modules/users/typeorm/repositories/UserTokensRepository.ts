@@ -1,3 +1,4 @@
+import { string } from 'joi';
 import { EntityRepository, Repository } from 'typeorm';
 import UserToken from '../entities/UserToken';
 
@@ -23,8 +24,8 @@ export class UsersTokensRepository extends Repository<UserToken> {
     return userToken;
   }
 
-  public async generate(user_id: string): Promise<UserToken | undefined> {
-    const userToken = await this.create({
+  public async generate(user_id: string): Promise<UserToken> {
+    const userToken = this.create({
       user_id,
     });
 
