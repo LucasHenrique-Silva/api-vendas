@@ -18,11 +18,11 @@ export default class OrderController {
 
     const createOrder = new CreateOrderService();
 
-    const order = await createOrder.execute({
+    const product = await createOrder.execute({
       customer_id,
       products,
     });
 
-    return res.json(order);
+    return res.json(product);
   }
 }

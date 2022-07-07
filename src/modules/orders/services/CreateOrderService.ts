@@ -1,8 +1,8 @@
 import { CustomersRepository } from '@modules/customers/typeorm/repositories/customersRepository';
-import ProductRepository from '@modules/products/typeorm/repositories/ProductsRepository';
 import AppError from '@shared/http/errors/AppError';
-import { OrdersRepository } from '../typeorm/repositories/OrdersRepository';
 import { getCustomRepository } from 'typeorm';
+import ProductRepository from '@modules/products/typeorm/repositories/ProductsRepository';
+import { OrdersRepository } from '../typeorm/repositories/OrdersRepository';
 import Order from '../typeorm/entities/Order';
 
 interface IProduct {
@@ -63,6 +63,7 @@ class CreateOrderService {
       quantity: product.quantity,
       price: existsProducts.filter(p => p.id === product.id)[0].price,
     }));
+    console.log(serializedProducts);
 
     const order = await ordersRepository.createOrder({
       customer: customerExists,
@@ -71,14 +72,16 @@ class CreateOrderService {
 
     const { order_products } = order;
 
-    const updatedProductQuantity = order_products.map(product => ({
+    const updatedProductQuantity = products.map(product => ({
       id: product.id,
       quantity:
         existsProducts.filter(p => p.id === product.id)[0].quantity -
         product.quantity,
     }));
+    //console.log(updatedProductQuantity);
 
     await productsRepository.save(updatedProductQuantity);
+    console.log('agorafim');
 
     return order;
   }
