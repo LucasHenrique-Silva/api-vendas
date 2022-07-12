@@ -1,4 +1,5 @@
 import 'reflect-metadata';
+import 'dotenv/config';
 import express, { NextFunction, Request, Response } from 'express';
 import cors from 'cors';
 import 'express-async-errors';
@@ -7,11 +8,17 @@ import routes from './routes/index';
 import AppError from './errors/AppError';
 import '@shared/typeorm';
 import uploadConfig from '@config/upload';
+import { pagination } from 'typeorm-pagination';
+import rateLimit from './middleware/reateLimiter';
 
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+
+//app.use(rateLimit);
+
+app.use(pagination);
 
 app.use('/files', express.static(uploadConfig.directory));
 
