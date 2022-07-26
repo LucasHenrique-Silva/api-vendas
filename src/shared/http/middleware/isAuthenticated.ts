@@ -1,4 +1,4 @@
-import AppError from '@shared/http/errors/AppError';
+import AppError from '../../../shared/http/errors/AppError';
 import { NextFunction, Request, Response } from 'express';
 import { verify } from 'jsonwebtoken';
 import authConfig from '@config/auth';
@@ -20,7 +20,9 @@ export default function isAuthenticated(
   }
 
   const [, token] = authHeader.split(' ');
-
+  if (!authConfig.jwt.secret) {
+    throw new AppError('Secret error');
+  }
   try {
     const decodedToken = verify(token, authConfig.jwt.secret);
 

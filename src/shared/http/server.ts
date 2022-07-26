@@ -10,6 +10,19 @@ import '@shared/typeorm';
 import uploadConfig from '@config/upload';
 import { pagination } from 'typeorm-pagination';
 import rateLimit from './middleware/reateLimiter';
+import { PrismaClient } from '@prisma/client';
+
+const prisma = new PrismaClient();
+
+async function main() {
+  console.log();
+}
+
+main()
+  .catch(e => {
+    console.error(e);
+  })
+  .finally(async () => await prisma.$disconnect);
 
 const app = express();
 
@@ -42,5 +55,6 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
 });
 
 app.listen(4444, () => {
-  console.log('Servidor está on');
+  console.log('Servidor está on http://localhost:4444/');
 });
+export default app;
