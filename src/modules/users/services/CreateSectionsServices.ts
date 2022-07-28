@@ -29,7 +29,9 @@ class CreateSectionSevice {
     if (!passwordConfirm) {
       throw new AppError('Incorrect Email/Password .', 401);
     }
-
+    if (!authConfig.jwt.secret) {
+      throw new AppError('Token invalid');
+    }
     const token = sign({}, authConfig.jwt.secret, {
       subject: user.id,
       expiresIn: authConfig.jwt.expireIn,

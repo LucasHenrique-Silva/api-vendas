@@ -27,7 +27,7 @@ orderRouter.post(
   }),
   ordersController.create,
 );
-
+/*
 orderRouter.post('/create', async (req, res) => {
   const customer = await prisma.costumers.findFirst({
     orderBy: {
@@ -115,5 +115,5 @@ orderRouter.get('/see/one/:id', async (req, res) => {
   }
   res.json(order);
 });
-
+*/
 export default orderRouter;

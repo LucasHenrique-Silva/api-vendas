@@ -57,4 +57,4 @@ app.use((error: Error, req: Request, res: Response, next: NextFunction) => {
 app.listen(4444, () => {
   console.log('Servidor está on http://localhost:4444/');
 });
-export default app;
+export { app };

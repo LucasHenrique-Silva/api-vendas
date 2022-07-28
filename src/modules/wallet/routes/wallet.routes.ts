@@ -94,6 +94,7 @@ walletRouter.put('/up/:id', async (req, res) => {
   if (!wallet) {
     throw new AppError('Wallet not found');
   }
+
   const money = parseFloat(wallet.funds) + Math.floor(Math.random() * 1000);
   const upWallet = await prisma.wallet.update({
     where: { id: req.params.id },

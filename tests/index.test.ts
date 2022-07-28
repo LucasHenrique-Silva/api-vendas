@@ -1,4 +1,4 @@
-import app from '../src/shared/http/server';
+import { app } from '../src/shared/http/server';
 import request from 'supertest';
 import { getConnection } from 'typeorm';
 
